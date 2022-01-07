@@ -1,0 +1,69 @@
+{
+  "mode": "dev",
+  "http": {
+    "port": 8080,
+    "redirectHttps": false
+  },
+  "https": {
+    "enabled": false,
+    "port": 8081,
+    "keyPwd": "123456",
+    "keyPath": "/Users/Víctor Gómez/ssl/cwd.keystore"
+  },
+  "threadPool": {
+    "core": 150,
+    "max": 200,
+    "timeout": 5000
+  },
+  "mapping": {
+    "mode": "ConsistentHash",
+    "maps": [
+      {
+        "name": "test",
+        "url": "198.41.215.88:80",
+        "weight": 200
+      },
+      {
+        "name": "test",
+        "url": "104.16.24.88:80",
+        "weight": 100
+      }
+    ]
+  },
+  "staticContent": {
+    "url": "localhost:8080",
+    "path": "D:\\workspace\\gateway"
+  },
+  "cors": {
+    "enabled": true,
+    "allowMethods": ["GET", "POST", "HEAD", "PUT", "PATCH", "DELETE"],
+    "whiteList": []
+  },
+  "flowLimits": {
+    "enabled": true,
+    "rate": 5,
+    "maxSize": 200
+  },
+  "filter": {
+    "before": [],
+    "after": []
+  }
+//  "consul": {
+//    "enabled": false,
+//    "host": "192.168.0.236:8500",
+//    "mapping": {
+//      "test": [
+//        "localhost:8080"
+//      ]
+//    }
+//  },
+//  "zk": {
+//    "enabled": false,
+//    "host": "127.0.0.1:2181",
+//    "mapping": {
+//      "test": [
+//        "localhost:8080"
+//      ]
+//    }
+//  }
+}

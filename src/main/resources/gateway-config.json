@@ -1,0 +1,51 @@
+{
+  "mode": "dev",
+  "http": {
+    "port": 8080,
+    "redirectHttps": false
+  },
+  "https": {
+    "enabled": false,
+    "port": 8081,
+    "keyPwd": "123456",
+    "keyPath": "/path/to/ssl/cwd.keystore"
+  },
+  "threadPool": {
+    "core": 150,
+    "max": 200,
+    "timeout": 5000
+  },
+  "mapping": {
+    "mode": "es.vira.gateway.loadbalance.ConsistentHash",
+    "maps": [
+      {
+        "name": "test",
+        "url": "localhost:9091",
+        "weight": 200
+      },
+      {
+        "name": "test",
+        "url": "localhost:9092",
+        "weight": 100
+      }
+    ]
+  },
+  "staticContent": {
+    "url": "localhost:8080",
+    "path": "/path/to/static-content"
+  },
+  "cors": {
+    "enabled": true,
+    "allowMethods": ["GET", "POST", "HEAD", "PUT", "PATCH", "DELETE"],
+    "whiteList": []
+  },
+  "flowLimits": {
+    "enabled": true,
+    "rate": 5,
+    "maxSize": 200
+  },
+  "filter": {
+    "before": [],
+    "after": []
+  }
+}
