@@ -27,20 +27,13 @@ public class CorsEnvironment {
     private List<String> allowMethods;
 
     public CorsEnvironment(ConfigEnvironment config) {
-//        JSONObject obj = JSON.parseObject(config.getChild("cors"));
         CorsConfig obj = config.getConfig().getCors();
         if (obj == null) {
             enable = false;
         } else {
             enable = obj.isEnabled();
             allowMethods = obj.getAllowMethods();
-//            JSONArray array = obj.getJSONArray("whiteList");
             whiteList = obj.getWhiteList();
-//            Set<String> whiteList = new TreeSet<>();
-//            for (int i = 0; i < array.size(); i++) {
-//                whiteList.add(array.getString(i));
-//            }
-//            this.whiteList = whiteList;
         }
     }
 

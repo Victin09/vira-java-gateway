@@ -32,7 +32,6 @@ public class FilterEnvironment {
             FilterConfig obj = config.getConfig().getFilter();
             if (obj != null) {
                 beforeFilters = new ArrayList<>();
-    //            JSONArray arr = obj.getJSONArray("before");
                 List<String> arr = obj.getBefore();
                 if (arr != null) {
                     for (String className : arr) {
@@ -40,12 +39,10 @@ public class FilterEnvironment {
                             beforeFilters.add((BeforeFilter) clazz.getDeclaredConstructor().newInstance());
                     }
                 }
-//                arr = obj.getJSONArray("after");
                 arr = obj.getAfter();
                 if (arr != null) {
                     afterFilters = new ArrayList<>();
                     for (String className : arr) {
-//                        String className = arr.getString(i);
                         Class<?> clazz = Class.forName(className);
                         afterFilters.add((AfterFilter) clazz.getDeclaredConstructor().newInstance());
                     }

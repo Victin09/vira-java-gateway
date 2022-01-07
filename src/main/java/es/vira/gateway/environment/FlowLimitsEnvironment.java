@@ -28,7 +28,6 @@ public class FlowLimitsEnvironment {
     private TokenBucket tokenBucket;
 
     public FlowLimitsEnvironment(ConfigEnvironment config) {
-//        JSONObject obj = JSON.parseObject(config.getChild("flowLimits"));
         FlowLimitsConfig obj = config.getConfig().getFlowLimits();
         if (obj == null) {
             enable = false;

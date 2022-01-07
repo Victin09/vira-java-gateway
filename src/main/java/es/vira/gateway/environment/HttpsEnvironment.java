@@ -32,7 +32,6 @@ public class HttpsEnvironment {
     private String keyPath;
 
     public HttpsEnvironment(ConfigEnvironment config) {
-//        JSONObject obj = JSONObject.parseObject(config.getChild("https"));
         HttpsConfig obj = config.getConfig().getHttps();
         if (obj == null) {
             enable = false;

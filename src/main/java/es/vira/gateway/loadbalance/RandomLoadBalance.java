@@ -18,7 +18,7 @@ public class RandomLoadBalance extends UrlMapping {
     /**
      * random seed
      */
-    private Random random = new Random();
+    private final Random random = new Random();
 
     public RandomLoadBalance(Map<String, List<Mapper>> urlMapping) {
         super(urlMapping);
@@ -37,7 +37,6 @@ public class RandomLoadBalance extends UrlMapping {
                 sum += m.getWeight();
             }
         }
-        System.out.println("SUMBEFORE: " + sum);
         // not found
         if (sum == 0) {
             return null;

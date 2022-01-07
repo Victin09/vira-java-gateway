@@ -38,9 +38,8 @@ public class UrlMapping implements MappingEnvironment {
      */
     @Override
     public Mapper getLoadBalance(String name, String host, String ip) {
-        System.out.println("getLoadBalance 1");
         log.warn("USING THE METHOD IS NOT RECOMMENDED, PLEASE OVERRIDE THIS METHOD.");
-        List<Mapper> list = mapping.get(host);
+        List<Mapper> list = mapping.get(name);
         int index = (int) System.currentTimeMillis() % list.size();
         return list.get(index);
     }

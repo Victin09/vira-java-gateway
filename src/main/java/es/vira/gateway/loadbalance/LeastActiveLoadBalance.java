@@ -19,7 +19,7 @@ public class LeastActiveLoadBalance extends UrlMapping {
     /**
      * active map
      */
-    private Map<String, Map<Mapper, AtomicInteger>> activeMap = new HashMap<>();
+    private final Map<String, Map<Mapper, AtomicInteger>> activeMap = new HashMap<>();
 
     public LeastActiveLoadBalance(Map<String, List<Mapper>> mapping) {
         super(mapping);
@@ -35,11 +35,11 @@ public class LeastActiveLoadBalance extends UrlMapping {
 
     @Override
     public Mapper getLoadBalance(String name, String host, String ip) {
-        List<Mapper> list = super.mapping.get(host);
+        List<Mapper> list = super.mapping.get(name);
         if (list == null) {
             return null;
         }
-        Map<Mapper, AtomicInteger> value = activeMap.get(host);
+        Map<Mapper, AtomicInteger> value = activeMap.get(name);
         Mapper mapper = null;
         int min = Integer.MAX_VALUE;
         for (Mapper m : list) {

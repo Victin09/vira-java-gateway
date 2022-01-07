@@ -38,7 +38,6 @@ public class HttpHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, FullHttpRequest request) {
         String host = request.headers().get(HttpHeaderNames.HOST);
-        System.out.println("TEST: " + request.uri());
         ByteBuf byteBuf = request.content();
         int len = (int) HttpUtil.getContentLength(request);
         byte[] bytes = null;
@@ -53,7 +52,7 @@ public class HttpHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        log.error("server catch exception.", cause);
+        log.error("Server catch exception.", cause);
         ctx.channel().writeAndFlush(ResponseUtils.buildFailResponse(HttpResponseStatus.INTERNAL_SERVER_ERROR))
                 .addListener(ChannelFutureListener.CLOSE);
     }

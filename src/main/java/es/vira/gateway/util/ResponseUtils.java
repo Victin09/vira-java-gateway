@@ -41,7 +41,7 @@ public class ResponseUtils {
      * @throws IOException network error
      */
     public static FullHttpResponse buildResponse(Response resp) throws IOException {
-        try {
+        try (resp) {
             FullHttpResponse response;
             ResponseBody responseBody = resp.body();
             if (responseBody == null) {
@@ -56,8 +56,6 @@ public class ResponseUtils {
                 response.headers().set(entry.getKey(), entry.getValue());
             }
             return response;
-        } finally {
-            resp.close();
         }
     }
 

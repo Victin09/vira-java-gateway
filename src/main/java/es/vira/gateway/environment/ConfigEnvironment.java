@@ -31,13 +31,7 @@ public class ConfigEnvironment {
             ObjectMapper mapper = new ObjectMapper();
             Config config = null;
             config = mapper.readValue(json, Config.class);
-//            JSONObject obj = JSONObject.parseObject(json);
-//            Map<String, String> map = new HashMap<>(obj.size() / 3 * 4);
-//            for (Map.Entry<String, Object> entry : obj.entrySet()) {
-//                map.put(entry.getKey(), entry.getValue().toString());
-//            }
             this.config = config;
-//            Object o = map.get("mode");
             this.isDevelop = config != null && config.getMode().equals(SystemConstant.DEVELOP);
         } catch (JsonProcessingException e) {
             e.printStackTrace();

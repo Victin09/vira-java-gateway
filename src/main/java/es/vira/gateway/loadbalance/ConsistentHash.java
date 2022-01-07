@@ -63,18 +63,8 @@ public class ConsistentHash extends UrlMapping {
 
     @Override
     public Mapper getLoadBalance(String name, String host, String ip) {
-        System.out.println("------------");
-        System.out.println("getLoadBalance 2");
-        System.out.println("name: " + name);
-        System.out.println("host: " + host);
-        System.out.println("ip: " + ip);
         int hashCode = ip.hashCode();
-        for (Map.Entry<String, Node> entry : hashCircle.entrySet()) {
-            System.out.println(entry.getKey() + "/" + entry.getValue());
-        }
         Node node = hashCircle.get(name);
-        System.out.println("node: " + node);
-        System.out.println("------------");
         if (node == null) {
             return null;
         }

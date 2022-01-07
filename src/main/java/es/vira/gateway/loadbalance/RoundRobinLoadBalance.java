@@ -18,11 +18,11 @@ public class RoundRobinLoadBalance extends UrlMapping {
     /**
      * round robin map
      */
-    private Map<String, List<Mapper>> roundRobinMap;
+    private final Map<String, List<Mapper>> roundRobinMap;
     /**
      * request index map
      */
-    private Map<String, AtomicInteger> indexMap;
+    private final Map<String, AtomicInteger> indexMap;
 
     public RoundRobinLoadBalance(Map<String, List<Mapper>> mapping) {
         super(mapping);
@@ -49,8 +49,11 @@ public class RoundRobinLoadBalance extends UrlMapping {
 
     @Override
     public Mapper getLoadBalance(String name, String host, String ip) {
-        List<Mapper> mappers = roundRobinMap.get(host);
-        int index = indexMap.get(host).incrementAndGet();
-        return mappers.get(Math.abs(index % mappers.size()));
+        if (name != null) {
+            List<Mapper> mappers = roundRobinMap.get(name);
+            int index = indexMap.get(name).incrementAndGet();
+            return mappers.get(Math.abs(index % mappers.size()));
+        }
+        return null;
     }
 }

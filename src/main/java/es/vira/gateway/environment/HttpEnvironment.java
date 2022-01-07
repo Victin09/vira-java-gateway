@@ -22,7 +22,6 @@ public class HttpEnvironment {
     private boolean redirectHttps;
 
     public HttpEnvironment(ConfigEnvironment config) {
-//        JSONObject obj = JSONObject.parseObject(config.getChild("http"));
         HttpConfig obj = config.getConfig().getHttp();
         if (obj != null) {
             port = obj.getPort();

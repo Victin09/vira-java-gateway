@@ -20,14 +20,13 @@ public class LocalFileEnvironment {
     private Map<String, String> pathMapping;
 
     public LocalFileEnvironment(ConfigEnvironment config) {
-//        JSONObject obj = JSON.parseObject(config.getChild("static"));
         StaticConfig obj = config.getConfig().getStaticContent();
         if (obj != null) {
             pathMapping = new HashMap<>();
             pathMapping.put(obj.getUrl(), obj.getPath());
-//            for (Map.Entry<String, Object> entry : obj.entrySet()) {
-//                pathMapping.put(entry.getKey(), (String) entry.getValue());
-//            }
+        }
+        for (Map.Entry<String, String> e: pathMapping.entrySet()) {
+            System.out.println("key: " + e.getKey() + " value: " + e.getValue());
         }
     }
 

@@ -77,7 +77,8 @@ public class RequestHandler implements Runnable {
                 return;
             }
             String ip = channel.remoteAddress().toString().split(":")[0];
-            mapper = applicationContext.getContext(MappingEnvironment.class).getLoadBalance(name.split("/")[1], host, ip);
+            String finalName = name.split("/").length > 0 ? name.split("/")[1] : null;
+            mapper = applicationContext.getContext(MappingEnvironment.class).getLoadBalance(finalName, host, ip);
             // mapper is not exist
             if (mapper == null) {
                 String path = applicationContext.getContext(LocalFileEnvironment.class).getPath(host);
@@ -89,6 +90,8 @@ public class RequestHandler implements Runnable {
                         log.info("GET STATIC RESOURCE {}", file.getPath());
                         response = ResponseUtils.buildResponse(file, request.protocolVersion());
                     }
+                } else {
+                    // Load from resources folder
                 }
                 return;
             }
@@ -109,7 +112,8 @@ public class RequestHandler implements Runnable {
             }
             process(mapper.getTarget());
         } catch (Exception e) {
-            log.error("server error.", e);
+            e.printStackTrace();
+            log.error("Server error: {}", e.getMessage());
             response = ResponseUtils.buildFailResponse(HttpResponseStatus.BAD_GATEWAY);
             if (mapper == null) {
                 log.error("{} {} static resource is unable.", host, request.uri());
