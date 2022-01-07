@@ -112,7 +112,6 @@ public class RequestHandler implements Runnable {
             }
             process(mapper.getTarget());
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("Server error: {}", e.getMessage());
             response = ResponseUtils.buildFailResponse(HttpResponseStatus.BAD_GATEWAY);
             if (mapper == null) {
